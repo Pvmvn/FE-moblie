@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">NTD BOOK MANAGER</string>
+    
+    <!-- Login Screen -->
+    <string name="login_title">Đăng Nhập Hệ Thống</string>
+    <string name="username">Tên Tài Khoản</string>
+    <string name="password">Mật Khẩu</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Quên Mật Khẩu?</string>
+    <string name="login_button">ĐĂNG NHẬP</string>
+    <string name="no_account">Bạn chưa có tài khoản? Đăng Ký Ngay</string>
+    
+    <!-- Register Screen -->
+    <string name="register_title">Đăng Ký Tài Khoản Mới</string>
+    <string name="fullname">Họ Và Tên</string>
+    <string name="phone">Số Điện Thoại</string>
+    <string name="register_button">ĐĂNG KÝ</string>
+    
+    <!-- Book Management -->
+    <string name="book_management">Quản Lý Sách</string>
+    <string name="add_book">Thêm Sách</string>
+    <string name="book_title">Tiêu Đề</string>
+    <string name="author">Tác Giả</string>
+    <string name="publisher">Nhà Xuất Bản</string>
+    <string name="price">Giá Bán</string>
+    <string name="quantity">Số Lượng</string>
+    <string name="category_id">Mã Thể Loại</string>
+    <string name="save">LƯU</string>
+    <string name="cancel">HỦY</string>
+    <string name="view_more">Xem Thêm</string>
+    <string name="books_tab">SÁCH</string>
+    <string name="categories_tab">THỂ LOẠI</string>
+    
+    <!-- Invoice Management -->
+    <string name="invoice_management">Quản Lý Hóa Đơn</string>
+    <string name="invoice_id">ID Hóa Đơn</string>
+    <string name="purchase_date">Ngày Mua</string>
+    <string name="invoices_tab">HÓA ĐƠN</string>
+    <string name="invoice_details_tab">HÓA ĐƠN CHI TIẾT</string>
+    
+    <!-- Statistics -->
+    <string name="statistics">Thống Kê</string>
+    <string name="top_10_books">Top 10 Đầu Sách Bán Chạy Nhất</string>
+    <string name="quantity_sold">Số Lượng Bán</string>
+    <string name="revenue_statistics">Thống Kê Doanh Thu</string>
+    <string name="daily_revenue">Doanh Thu Theo Ngày</string>
+    <string name="monthly_revenue">Doanh Thu Theo Tháng</string>
+    <string name="yearly_revenue">Doanh Thu Theo Năm</string>
+    
+    <!-- Account Management -->
+    <string name="account_management">Quản Lý Tài Khoản</string>
+    <string name="add_account">Thêm Tài khoản</string>
+    <string name="change_password">Đổi Mật Khẩu</string>
+    <string name="logout">Đăng Xuất</string>
+    <string name="exam">Bài Thi</string>
+    <string name="account_list">Danh Sách</string>
+    <string name="username_label">Username</string>
+    <string name="information">Information</string>
+</resources>
