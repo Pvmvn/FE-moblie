@@ -5,20 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dark">
+    android:background="#0F172A">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface_dark">
+        android:background="#1E293B"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/surface_dark"
+            android:background="#1E293B"
             app:title="@string/book_management"
-            app:titleTextColor="@color/text_primary"
+            app:titleTextColor="#FFFFFF"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -33,10 +34,11 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/surface_dark"
-            app:tabTextColor="@color/text_secondary"
-            app:tabSelectedTextColor="@color/primary_blue"
-            app:tabIndicatorColor="@color/primary_blue">
+            android:background="#1E293B"
+            app:tabTextColor="#94A3B8"
+            app:tabSelectedTextColor="#2563EB"
+            app:tabIndicatorColor="#2563EB"
+            app:tabIndicatorHeight="3dp">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -65,10 +67,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="80dp"
         android:src="@drawable/ic_book"
-        app:backgroundTint="@color/primary_blue"
-        app:tint="@color/white" />
-
+        app:backgroundTint="#2563EB"
+        app:tint="#FFFFFF"
+        android:contentDescription="Thêm sách" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

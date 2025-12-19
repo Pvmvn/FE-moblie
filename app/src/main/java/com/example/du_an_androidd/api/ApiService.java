@@ -30,6 +30,14 @@ public interface ApiService {
     @POST("books")
     Call<ApiResponse<Book>> addBook(@Body BookRequest request);
 
+    // --- [MỚI] THÊM CÁC HÀM SỬA/XÓA SÁCH ---
+    @PUT("books/{id}")
+    Call<ApiResponse<Book>> updateBook(@Path("id") int id, @Body BookRequest request);
+
+    @DELETE("books/{id}")
+    Call<ApiResponse<Void>> deleteBook(@Path("id") int id);
+    // ---------------------------------------
+
     // --- MEMBERS ---
     @GET("members")
     Call<ApiResponse<List<Member>>> getMembers();
@@ -45,9 +53,9 @@ public interface ApiService {
     Call<ApiResponse<Loan>> borrowBook(@Body LoanRequest request);
 
     @POST("loans/return")
-    Call<ApiResponse<Loan>> returnBook(@Body Object returnRequest); // Bạn có thể tạo ReturnRequest nếu cần
+    Call<ApiResponse<Loan>> returnBook(@Body Object returnRequest);
 
     // --- FINES ---
     @GET("fines")
-    Call<ApiResponse<List<Fine>>> getFines(@Query("paid") Integer paid); // 0: chưa trả, 1: đã trả
+    Call<ApiResponse<List<Fine>>> getFines(@Query("paid") Integer paid);
 }

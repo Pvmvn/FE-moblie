@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView; // Mới: Import ImageView
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,32 +15,32 @@ import com.example.du_an_androidd.model.response.Book;
 import com.example.du_an_androidd.model.response.Author;
 // -----------------------
 
+// --- IMPORT GLIDE ---
+import com.bumptech.glide.Glide;
+// --------------------
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * RecyclerView Adapter for Book list (Đã kết nối API Model)
+ * RecyclerView Adapter for Book list (Đã cập nhật hiển thị Ảnh và Số lượng)
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
-    // Sử dụng Model Book từ API response
     private List<Book> bookList;
     private OnBookClickListener listener;
 
-    // Interface cập nhật để truyền object Book thật
     public interface OnBookClickListener {
         void onEditClick(Book book);
         void onDeleteClick(Book book);
         void onViewMoreClick(Book book);
     }
 
-    // Constructor
     public BookAdapter(OnBookClickListener listener) {
-        this.bookList = new ArrayList<>(); // Khởi tạo list rỗng tránh lỗi null
+        this.bookList = new ArrayList<>();
         this.listener = listener;
     }
 
-    // Hàm cập nhật dữ liệu từ API
     public void setData(List<Book> list) {
         this.bookList = list;
         notifyDataSetChanged();
@@ -60,27 +61,37 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         // 1. Hiển thị Tiêu đề
         holder.tvBookTitle.setText(book.getTitle());
 
-        // 2. Hiển thị Tác giả (Xử lý List<Author> từ API)
+        // 2. Hiển thị Tác giả
         String authorText = "Chưa cập nhật";
-
-        // Kiểm tra nếu có danh sách tác giả và không rỗng
         if (book.getAuthors() != null && !book.getAuthors().isEmpty()) {
-            // Lấy tên tác giả đầu tiên
             authorText = book.getAuthors().get(0).getName();
-
-            // Nếu có nhiều hơn 1 tác giả, thêm "..."
             if (book.getAuthors().size() > 1) {
                 authorText += " và nnk";
             }
         } else if (book.getPublisher() != null) {
-            // Nếu không có tác giả, hiển thị tạm Nhà xuất bản
             authorText = book.getPublisher();
         }
-
         holder.tvAuthor.setText("Tác giả: " + authorText);
 
-        // 3. Hiển thị số lượng (Tùy chọn, nếu bạn muốn hiển thị thêm)
-        // String qty = "SL: " + book.getAvailableCopies();
+        // 3. [MỚI] Hiển thị Số Lượng
+        // Dùng getQuantity() từ Model mới cập nhật
+        holder.tvQuantity.setText("SL: " + book.getQuantity());
+
+        // 4. [MỚI] Load Ảnh Bìa bằng Glide
+        String imageUrl = book.getImageUrl();
+
+        // Kiểm tra xem link ảnh có hợp lệ không
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUrl) // Link ảnh từ API
+                    .placeholder(R.drawable.ic_book) // Ảnh hiển thị trong lúc chờ tải
+                    .error(R.drawable.ic_book)       // Ảnh hiển thị nếu link lỗi
+                    .centerCrop()                    // Cắt ảnh cho vừa khung
+                    .into(holder.imgBookCover);      // Đẩy vào ImageView
+        } else {
+            // Nếu không có link ảnh, set ảnh mặc định
+            holder.imgBookCover.setImageResource(R.drawable.ic_book);
+        }
 
         // Sự kiện click
         holder.btnEdit.setOnClickListener(v -> listener.onEditClick(book));
@@ -99,6 +110,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     static class BookViewHolder extends RecyclerView.ViewHolder {
         TextView tvBookTitle;
         TextView tvAuthor;
+
+        // [MỚI] Khai báo thêm view hiển thị ảnh và số lượng
+        ImageView imgBookCover;
+        TextView tvQuantity;
+
         ImageButton btnEdit;
         ImageButton btnDelete;
         android.widget.Button btnViewMore;
@@ -107,6 +123,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             super(itemView);
             tvBookTitle = itemView.findViewById(R.id.tvBookTitle);
             tvAuthor = itemView.findViewById(R.id.tvAuthor);
+
+            // [MỚI] Ánh xạ view mới từ item_book.xml
+            imgBookCover = itemView.findViewById(R.id.imgBookCover);
+            tvQuantity = itemView.findViewById(R.id.tvQuantity);
+
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnViewMore = itemView.findViewById(R.id.btnViewMore);
