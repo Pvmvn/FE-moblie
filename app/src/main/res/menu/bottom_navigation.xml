@@ -4,20 +4,19 @@
         android:id="@+id/nav_books"
         android:icon="@drawable/ic_book"
         android:title="@string/book_management" />
-    
+
     <item
-        android:id="@+id/nav_invoices"
+        android:id="@+id/nav_loans"
         android:icon="@drawable/ic_invoice"
-        android:title="@string/invoice_management" />
-    
+        android:title="@string/loan_management" />
+
     <item
-        android:id="@+id/nav_statistics"
-        android:icon="@drawable/ic_statistics"
-        android:title="@string/statistics" />
-    
+        android:id="@+id/nav_customers"
+        android:icon="@drawable/ic_person"
+        android:title="@string/customer_management" />
+
     <item
         android:id="@+id/nav_account"
         android:icon="@drawable/ic_account"
         android:title="@string/account_management" />
 </menu>
-

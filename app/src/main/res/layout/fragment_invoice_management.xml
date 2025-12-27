@@ -4,22 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F172A">
+    android:background="@android:color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1E293B"
+        android:background="@android:color/white"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#1E293B"
-            app:title="@string/invoice_management"
-            app:titleTextColor="#FFFFFF"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+            android:background="@android:color/white"
+            app:title="Quản lý hóa đơn"
+            app:titleTextColor="@android:color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,21 +36,20 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#1E293B"
-                app:tabTextColor="#94A3B8"
-                app:tabSelectedTextColor="#2563EB"
-                app:tabIndicatorColor="#2563EB"
-                app:tabIndicatorHeight="3dp">
+                android:background="@android:color/white"
+                app:tabIndicatorColor="@android:color/black"
+                app:tabSelectedTextColor="@android:color/black"
+                app:tabTextColor="#757575">
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/invoices_tab" />
+                    android:text="Danh sách" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/invoice_details_tab" />
+                    android:text="Chi tiết" />
             </com.google.android.material.tabs.TabLayout>
 
             <LinearLayout

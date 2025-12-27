@@ -23,10 +23,24 @@ public class Loan {
     @SerializedName("status")
     private String status;
 
+    @SerializedName("book_image_url")
+    private String bookImageUrl;
+
+    @SerializedName("book_author")
+    private String bookAuthor;
+
+    @SerializedName("member_id")
+    private int memberId;
+
     // --- CÁC GETTER CẦN BỔ SUNG ---
     public int getId() { return id; } // Hàm getId() quan trọng
     public String getBookTitle() { return bookTitle; }
     public String getMemberName() { return memberName; }
     public String getBorrowedAt() { return borrowedAt; }
+    public String getDueAt() { return dueAt; }
+    public String getReturnedAt() { return returnedAt; }
     public String getStatus() { return status; }
+    public String getBookImageUrl() { return bookImageUrl; }
+    public String getBookAuthor() { return bookAuthor; }
+    public int getMemberId() { return memberId; }
 }

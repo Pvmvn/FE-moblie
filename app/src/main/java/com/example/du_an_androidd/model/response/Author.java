@@ -1,8 +1,9 @@
 package com.example.du_an_androidd.model.response;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class Author {
+public class Author implements Serializable {
     @SerializedName("id")
     private int id;
 

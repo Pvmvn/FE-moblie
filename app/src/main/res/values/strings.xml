@@ -31,12 +31,16 @@
     <string name="books_tab">SÁCH</string>
     <string name="categories_tab">THỂ LOẠI</string>
     
-    <!-- Invoice Management -->
-    <string name="invoice_management">Quản Lý Hóa Đơn</string>
+    <!-- Loan Management -->
+    <string name="loan_management">Quản Lý Mượn/Trả</string>
+    <string name="invoice_management">Quản Lý Mượn/Trả</string>
     <string name="invoice_id">ID Hóa Đơn</string>
     <string name="purchase_date">Ngày Mua</string>
     <string name="invoices_tab">HÓA ĐƠN</string>
     <string name="invoice_details_tab">HÓA ĐƠN CHI TIẾT</string>
+    
+    <!-- Customer Management -->
+    <string name="customer_management">Quản Lý Khách hàng</string>
     
     <!-- Statistics -->
     <string name="statistics">Thống Kê</string>

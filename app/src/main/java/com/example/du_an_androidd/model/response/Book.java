@@ -1,8 +1,9 @@
 package com.example.du_an_androidd.model.response;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable {
     @SerializedName("id")
     private int id;
 
@@ -31,6 +32,15 @@ public class Book {
     @SerializedName("quantity")
     private int quantity;
 
+    @SerializedName("description")
+    private String description;
+
+    @SerializedName("total_copies")
+    private int totalCopies;
+
+    @SerializedName("category_id")
+    private int categoryId;
+
     // --- CÁC GETTER ---
     public int getId() { return id; }
     public String getTitle() { return title; }
@@ -43,4 +53,7 @@ public class Book {
     // --- GETTER CHO TRƯỜNG MỚI ---
     public String getImageUrl() { return imageUrl; }
     public int getQuantity() { return quantity; }
+    public String getDescription() { return description; }
+    public int getTotalCopies() { return totalCopies > 0 ? totalCopies : quantity; }
+    public int getCategoryId() { return categoryId; }
 }

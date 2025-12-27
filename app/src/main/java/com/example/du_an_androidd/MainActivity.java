@@ -2,7 +2,7 @@ package com.example.du_an_androidd;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import com.example.du_an_androidd.fragment.AccountManagementFragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -12,9 +12,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.du_an_androidd.utils.TokenManager;
 // -----------------
 
+
 /**
  * Main Activity with Bottom Navigation
- * Chứa các fragments: Books, Invoices, Statistics, Account Management
+ * Chứa các fragments: Books, Invoices, Account Management
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -52,14 +53,16 @@ public class MainActivity extends AppCompatActivity {
             Fragment selectedFragment = null;
 
             int itemId = item.getItemId();
+
             if (itemId == R.id.nav_books) {
                 selectedFragment = new BookManagementFragment();
-            } else if (itemId == R.id.nav_invoices) {
-                // Đổi tên biến cho dễ hiểu: InvoiceFragment thực chất là quản lý Mượn/Trả (Loans)
-                selectedFragment = new InvoiceManagementFragment();
-            } else if (itemId == R.id.nav_statistics) {
-                selectedFragment = new StatisticsFragment();
-            } else if (itemId == R.id.nav_account) {
+            } else if (itemId == R.id.nav_loans) {
+                selectedFragment = new InvoiceManagementFragment(); // Quản lý Mượn/Trả
+            } else if (itemId == R.id.nav_customers) {
+                selectedFragment = new CustomerManagementFragment(); // Quản lý Khách hàng
+            }
+            // --- ĐÃ XÓA PHẦN THỐNG KÊ (STATISTICS) Ở ĐÂY ---
+            else if (itemId == R.id.nav_account) {
                 selectedFragment = new AccountManagementFragment();
             }
 

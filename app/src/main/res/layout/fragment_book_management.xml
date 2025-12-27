@@ -5,22 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F172A">
+    android:background="@android:color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1E293B"
+        android:background="@android:color/white"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#1E293B"
-            app:title="@string/book_management"
-            app:titleTextColor="#FFFFFF"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+            android:background="@android:color/white"
+            app:title="Quản lý sách"
+            app:titleTextColor="@android:color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,34 +29,12 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#1E293B"
-            app:tabTextColor="#94A3B8"
-            app:tabSelectedTextColor="#2563EB"
-            app:tabIndicatorColor="#2563EB"
-            app:tabIndicatorHeight="3dp">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/books_tab" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/categories_tab" />
-        </com.google.android.material.tabs.TabLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBooks"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingBottom="88dp"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingBottom="88dp"
             tools:listitem="@layout/item_book" />
 
     </LinearLayout>
@@ -69,8 +46,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="80dp"
-        android:src="@drawable/ic_book"
-        app:backgroundTint="#2563EB"
-        app:tint="#FFFFFF"
-        android:contentDescription="Thêm sách" />
+        android:contentDescription="Thêm sách"
+        android:src="@drawable/ic_book" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

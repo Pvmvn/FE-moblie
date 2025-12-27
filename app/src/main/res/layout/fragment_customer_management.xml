@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quản lý Khách hàng"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_search_rounded"
+                android:backgroundTint="#F1F5F9"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="12dp"
+                android:hint="Tìm tên hoặc email..."
+                android:paddingHorizontal="16dp"
+                android:inputType="text" />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:paddingVertical="8dp"
+            android:clipToPadding="false">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <Button
+                    android:id="@+id/btnFilterAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Tất cả"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:backgroundTint="#2563EB"
+                    android:textColor="@android:color/white"
+                    style="?android:attr/buttonBarButtonStyle" />
+
+                <Button
+                    android:id="@+id/btnFilterActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Đang hoạt động"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:backgroundTint="#F1F5F9"
+                    android:textColor="#334155"
+                    app:elevation="0dp"
+                    style="?android:attr/buttonBarButtonStyle" />
+
+                <Button
+                    android:id="@+id/btnFilterExpired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Hết hạn"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:backgroundTint="#F1F5F9"
+                    android:textColor="#334155"
+                    app:elevation="0dp"
+                    style="?android:attr/buttonBarButtonStyle" />
+
+                <Button
+                    android:id="@+id/btnFilterLocked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="Bị khóa"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:backgroundTint="#F1F5F9"
+                    android:textColor="#334155"
+                    app:elevation="0dp"
+                    style="?android:attr/buttonBarButtonStyle" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/tvMemberCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Danh sách thành viên (24)"
+            android:textColor="#757575"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCustomers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="88dp"
+            tools:listitem="@layout/item_customer" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Thêm khách hàng"
+        app:elevation="4dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

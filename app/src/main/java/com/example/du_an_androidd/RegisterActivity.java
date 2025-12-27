@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton; // Import thêm
+import android.widget.TextView;    // Import thêm
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-// --- IMPORT MỚI ---
 import com.example.du_an_androidd.api.ApiClient;
 import com.example.du_an_androidd.model.ApiResponse;
 import com.example.du_an_androidd.model.request.RegisterRequest;
@@ -18,7 +19,6 @@ import com.example.du_an_androidd.model.request.RegisterRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-// -----------------
 
 /**
  * Register Activity - Đã kết nối API
@@ -31,19 +31,27 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText etPhone;
     private Button btnRegister;
 
+    // --- KHAI BÁO THÊM ---
+    private ImageButton btnBack;
+    private TextView tvLoginLink;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Ánh xạ View
+        // Ánh xạ View cũ
         etFullname = findViewById(R.id.etFullname);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         etPhone = findViewById(R.id.etPhone);
         btnRegister = findViewById(R.id.btnRegister);
 
-        // Sự kiện click nút Đăng ký
+        // --- ÁNH XẠ MỚI (Cho nút Back và Chữ Đăng nhập) ---
+        btnBack = findViewById(R.id.btnBack);
+        tvLoginLink = findViewById(R.id.tvLoginLink);
+
+        // 1. Sự kiện nút Đăng Ký
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,12 +68,22 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // 2. --- THÊM: Sự kiện nút Back (Mũi tên) ---
+        btnBack.setOnClickListener(v -> {
+            finish(); // Đóng màn hình này để quay lại
+        });
+
+        // 3. --- THÊM: Sự kiện bấm chữ "Đăng nhập" ---
+        tvLoginLink.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish(); // Đóng màn hình Đăng ký
+        });
     }
 
     private void performRegister(String username, String password, String fullname) {
         // 1. Tạo request
-        // Lưu ý: API yêu cầu 'role', mình để mặc định là "librarian".
-        // Trường 'phone' bị bỏ qua vì API auth/register trong tài liệu không có.
         RegisterRequest request = new RegisterRequest(username, password, fullname, "librarian");
 
         // 2. Gọi API

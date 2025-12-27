@@ -4,26 +4,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView; // Mới: Import ImageView
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-// --- IMPORT MODEL MỚI ---
 import com.example.du_an_androidd.model.response.Book;
-import com.example.du_an_androidd.model.response.Author;
-// -----------------------
-
-// --- IMPORT GLIDE ---
 import com.bumptech.glide.Glide;
-// --------------------
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * RecyclerView Adapter for Book list (Đã cập nhật hiển thị Ảnh và Số lượng)
+ * RecyclerView Adapter for Book list
+ * Đã sửa lỗi ClassCastException (Button -> TextView)
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
@@ -73,23 +68,19 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         }
         holder.tvAuthor.setText("Tác giả: " + authorText);
 
-        // 3. [MỚI] Hiển thị Số Lượng
-        // Dùng getQuantity() từ Model mới cập nhật
+        // 3. Hiển thị Số Lượng
         holder.tvQuantity.setText("SL: " + book.getQuantity());
 
-        // 4. [MỚI] Load Ảnh Bìa bằng Glide
+        // 4. Load Ảnh Bìa bằng Glide
         String imageUrl = book.getImageUrl();
-
-        // Kiểm tra xem link ảnh có hợp lệ không
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Glide.with(holder.itemView.getContext())
-                    .load(imageUrl) // Link ảnh từ API
-                    .placeholder(R.drawable.ic_book) // Ảnh hiển thị trong lúc chờ tải
-                    .error(R.drawable.ic_book)       // Ảnh hiển thị nếu link lỗi
-                    .centerCrop()                    // Cắt ảnh cho vừa khung
-                    .into(holder.imgBookCover);      // Đẩy vào ImageView
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_book)
+                    .error(R.drawable.ic_book)
+                    .centerCrop()
+                    .into(holder.imgBookCover);
         } else {
-            // Nếu không có link ảnh, set ảnh mặc định
             holder.imgBookCover.setImageResource(R.drawable.ic_book);
         }
 
@@ -101,35 +92,33 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public int getItemCount() {
-        if (bookList != null) {
-            return bookList.size();
-        }
-        return 0;
+        return (bookList != null) ? bookList.size() : 0;
     }
 
     static class BookViewHolder extends RecyclerView.ViewHolder {
         TextView tvBookTitle;
         TextView tvAuthor;
-
-        // [MỚI] Khai báo thêm view hiển thị ảnh và số lượng
         ImageView imgBookCover;
         TextView tvQuantity;
 
         ImageButton btnEdit;
         ImageButton btnDelete;
-        android.widget.Button btnViewMore;
+
+        // --- SỬA LỖI Ở ĐÂY ---
+        // Đổi từ Button -> TextView để khớp với XML item_book.xml
+        TextView btnViewMore;
+        // ---------------------
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
             tvBookTitle = itemView.findViewById(R.id.tvBookTitle);
             tvAuthor = itemView.findViewById(R.id.tvAuthor);
-
-            // [MỚI] Ánh xạ view mới từ item_book.xml
             imgBookCover = itemView.findViewById(R.id.imgBookCover);
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
-
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+
+            // Ánh xạ
             btnViewMore = itemView.findViewById(R.id.btnViewMore);
         }
     }

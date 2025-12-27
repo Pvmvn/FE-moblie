@@ -17,6 +17,9 @@ public interface ApiService {
     @POST("auth/register")
     Call<ApiResponse<Object>> register(@Body RegisterRequest request);
 
+    @GET("auth/me")
+    Call<ApiResponse<Object>> getCurrentUser();
+
     // --- BOOKS ---
     @GET("books")
     Call<ApiResponse<List<Book>>> getBooks(@Query("page") int page, @Query("limit") int limit);
@@ -53,7 +56,7 @@ public interface ApiService {
     Call<ApiResponse<Loan>> borrowBook(@Body LoanRequest request);
 
     @POST("loans/return")
-    Call<ApiResponse<Loan>> returnBook(@Body Object returnRequest);
+    Call<ApiResponse<Loan>> returnBook(@Body ReturnRequest returnRequest);
 
     // --- FINES ---
     @GET("fines")

@@ -1,127 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F172A"
+    android:background="@android:color/white"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp">
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="32dp"
-        android:src="@drawable/ic_book"
-        app:tint="#3B82F6" />
+    android:padding="32dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="ĐĂNG NHẬP"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
+        android:layout_marginBottom="40dp"
+        android:text="Đăng Nhập"
+        android:textColor="@android:color/black"
+        android:textSize="32sp"
         android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <EditText
+        android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:boxBackgroundColor="#1E293B"
-        app:boxStrokeColor="#3B82F6"
-        app:hintEnabled="false">
+        android:background="@android:drawable/edit_text"
+        android:hint="Tên đăng nhập"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="12dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tên đăng nhập"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#94A3B8" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:boxBackgroundColor="#1E293B"
-        app:boxStrokeColor="#3B82F6"
-        app:endIconMode="password_toggle"
-        app:endIconTint="#94A3B8"
-        app:hintEnabled="false">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#94A3B8" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:gravity="center_vertical"
+        android:background="@android:drawable/edit_text"
+        android:hint="Mật khẩu"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:padding="12dp" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Đăng nhập"
+        android:textAllCaps="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/cbRememberMe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="#3B82F6"
-            android:text="Ghi nhớ"
-            android:textColor="#94A3B8" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
         <TextView
-            android:id="@+id/tvForgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quên mật khẩu?"
-            android:textColor="#3B82F6"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textColor="#555555" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:backgroundTint="#2563EB"
-        android:text="Đăng nhập"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:cornerRadius="8dp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chưa có tài khoản? "
-            android:textColor="#94A3B8" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="16dp"
+            android:layout_marginHorizontal="12dp"
+            android:background="#CCCCCC" />
 
         <TextView
             android:id="@+id/tvRegisterLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đăng ký ngay"
-            android:textColor="#3B82F6"
+            android:text="Đăng ký"
+            android:textColor="#0000FF"
             android:textStyle="bold" />
     </LinearLayout>
 

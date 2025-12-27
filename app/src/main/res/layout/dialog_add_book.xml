@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#0F172A"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:padding="24dp">
 
     <LinearLayout
@@ -14,127 +13,78 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="Thêm Sách Mới"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+            android:textColor="@android:color/black"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tên sách"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilTitle"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <EditText
+            android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:boxBackgroundColor="#1E293B"
-            app:boxCornerRadiusBottomEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
-            app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusTopStart="8dp"
-            app:boxStrokeColor="#3B82F6"
-            app:boxStrokeWidth="0dp"
-            app:hintEnabled="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nhập tên sách"
-                android:inputType="textCapSentences"
-                android:paddingVertical="14dp"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#64748B" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="16dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="Nhập tên sách"
+            android:inputType="textCapSentences"
+            android:minHeight="48dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="Link Ảnh (URL)"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilImageUrl"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <EditText
+            android:id="@+id/etImageUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:boxBackgroundColor="#1E293B"
-            app:boxCornerRadiusBottomEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
-            app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusTopStart="8dp"
-            app:boxStrokeColor="#3B82F6"
-            app:boxStrokeWidth="0dp"
-            app:hintEnabled="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etImageUrl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="https://example.com/image.jpg"
-                android:inputType="textUri"
-                android:paddingVertical="14dp"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#64748B" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="16dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="https://example.com/image.jpg"
+            android:inputType="textUri"
+            android:minHeight="48dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="2"
-                android:layout_marginEnd="8dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nhà xuất bản"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilPublisher"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <EditText
+                    android:id="@+id/etPublisher"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxBackgroundColor="#1E293B"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:hintEnabled="false">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPublisher"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="NXB Kim Đồng"
-                        android:inputType="textCapWords"
-                        android:paddingVertical="14dp"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#64748B" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@android:drawable/edit_text"
+                    android:hint="NXB Kim Đồng"
+                    android:inputType="textCapWords"
+                    android:minHeight="48dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -147,83 +97,51 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Năm"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilYear"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <EditText
+                    android:id="@+id/etYear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxBackgroundColor="#1E293B"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:hintEnabled="false">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etYear"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="2024"
-                        android:inputType="number"
-                        android:maxLength="4"
-                        android:paddingVertical="14dp"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#64748B" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@android:drawable/edit_text"
+                    android:hint="2024"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:minHeight="48dp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ID Tác giả"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilAuthor"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <EditText
+                    android:id="@+id/etAuthor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxBackgroundColor="#1E293B"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:hintEnabled="false">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etAuthor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="VD: 1"
-                        android:inputType="number"
-                        android:paddingVertical="14dp"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#64748B" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@android:drawable/edit_text"
+                    android:hint="VD: 1"
+                    android:inputType="number"
+                    android:minHeight="48dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -236,70 +154,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ID Thể loại"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilCategoryId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <EditText
+                    android:id="@+id/etCategoryId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxBackgroundColor="#1E293B"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:hintEnabled="false">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etCategoryId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="VD: 2"
-                        android:inputType="number"
-                        android:paddingVertical="14dp"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#64748B" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@android:drawable/edit_text"
+                    android:hint="VD: 2"
+                    android:inputType="number"
+                    android:minHeight="48dp" />
             </LinearLayout>
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="Số lượng nhập kho"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilQuantity"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <EditText
+            android:id="@+id/etQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:boxBackgroundColor="#1E293B"
-            app:boxCornerRadiusBottomEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
-            app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusTopStart="8dp"
-            app:boxStrokeWidth="0dp"
-            app:hintEnabled="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etQuantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="VD: 100"
-                android:inputType="number"
-                android:paddingVertical="14dp"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#64748B"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:background="@android:drawable/edit_text"
+            android:hint="VD: 100"
+            android:inputType="number"
+            android:minHeight="48dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -307,29 +192,26 @@
             android:layout_marginTop="32dp"
             android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:backgroundTint="#334155"
+                android:minHeight="56dp"
                 android:text="Hủy"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                app:cornerRadius="8dp"/>
+                android:textAllCaps="false"
+                style="?android:attr/buttonBarButtonStyle" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnSave"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:backgroundTint="#2563EB"
-                android:text="Lưu"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                app:cornerRadius="8dp"/>
+                android:minHeight="56dp"
+                android:text="Lưu sách"
+                android:textAllCaps="false" />
         </LinearLayout>
 
     </LinearLayout>

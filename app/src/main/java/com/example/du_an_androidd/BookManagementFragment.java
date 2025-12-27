@@ -1,12 +1,13 @@
 package com.example.du_an_androidd;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText; // QUAN TRỌNG: Dùng EditText thường
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,9 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText; // Import cái này
 
-// --- IMPORT API ---
 import com.example.du_an_androidd.api.ApiClient;
 import com.example.du_an_androidd.api.ApiService;
 import com.example.du_an_androidd.model.ApiResponse;
@@ -45,7 +44,15 @@ public class BookManagementFragment extends Fragment {
         rvBooks = view.findViewById(R.id.rvBooks);
         fabAddBook = view.findViewById(R.id.fabAddBook);
 
-        // 1. Cấu hình Adapter
+        setupRecyclerView();
+        loadBooksFromApi();
+
+        fabAddBook.setOnClickListener(v -> showAddBookDialog(null));
+
+        return view;
+    }
+
+    private void setupRecyclerView() {
         bookAdapter = new BookAdapter(new BookAdapter.OnBookClickListener() {
             @Override
             public void onEditClick(Book book) {
@@ -54,25 +61,19 @@ public class BookManagementFragment extends Fragment {
 
             @Override
             public void onDeleteClick(Book book) {
-                // Gọi hàm xóa sách
                 deleteBookApi(book);
             }
 
             @Override
             public void onViewMoreClick(Book book) {
-                Toast.makeText(getContext(), "Chi tiết: " + book.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), BookDetailActivity.class);
+                intent.putExtra(BookDetailActivity.EXTRA_BOOK, book);
+                startActivity(intent);
             }
         });
 
         rvBooks.setLayoutManager(new LinearLayoutManager(getContext()));
         rvBooks.setAdapter(bookAdapter);
-
-        // 2. Tải dữ liệu
-        loadBooksFromApi();
-
-        fabAddBook.setOnClickListener(v -> showAddBookDialog(null));
-
-        return view;
     }
 
     private void loadBooksFromApi() {
@@ -82,6 +83,8 @@ public class BookManagementFragment extends Fragment {
             public void onResponse(Call<ApiResponse<List<Book>>> call, Response<ApiResponse<List<Book>>> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     bookAdapter.setData(response.body().getData());
+                } else {
+                    Toast.makeText(getContext(), "Không tải được danh sách", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -97,44 +100,42 @@ public class BookManagementFragment extends Fragment {
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_book, null);
         builder.setView(dialogView);
 
-        // --- 1. ÁNH XẠ CÁC TRƯỜNG MỚI (Khớp với dialog_add_book.xml mới) ---
-        TextInputEditText etTitle = dialogView.findViewById(R.id.etTitle);
-        TextInputEditText etImageUrl = dialogView.findViewById(R.id.etImageUrl); // Mới
-        TextInputEditText etPublisher = dialogView.findViewById(R.id.etPublisher);
-        TextInputEditText etYear = dialogView.findViewById(R.id.etYear);         // Mới
-        TextInputEditText etAuthor = dialogView.findViewById(R.id.etAuthor);
-        TextInputEditText etCategoryId = dialogView.findViewById(R.id.etCategoryId);
-        TextInputEditText etQuantity = dialogView.findViewById(R.id.etQuantity);   // Mới (đã hiện)
+        // --- SỬA LỖI: Dùng EditText thay vì TextInputEditText ---
+        EditText etTitle = dialogView.findViewById(R.id.etTitle);
+        EditText etImageUrl = dialogView.findViewById(R.id.etImageUrl);
+        EditText etPublisher = dialogView.findViewById(R.id.etPublisher);
+        EditText etYear = dialogView.findViewById(R.id.etYear);
+        EditText etAuthor = dialogView.findViewById(R.id.etAuthor);
+        EditText etCategoryId = dialogView.findViewById(R.id.etCategoryId);
+        EditText etQuantity = dialogView.findViewById(R.id.etQuantity);
 
         Button btnSave = dialogView.findViewById(R.id.btnSave);
         Button btnCancel = dialogView.findViewById(R.id.btnCancel);
         AlertDialog dialog = builder.create();
 
-        // --- 2. ĐIỀN DỮ LIỆU CŨ (Nếu là chức năng Sửa) ---
+        // Điền dữ liệu cũ nếu là chế độ Sửa
         if (book != null) {
             etTitle.setText(book.getTitle());
             etPublisher.setText(book.getPublisher());
             etImageUrl.setText(book.getImageUrl());
             etYear.setText(String.valueOf(book.getYear()));
             etQuantity.setText(String.valueOf(book.getQuantity()));
-
-            // Xử lý hiển thị ID tác giả (lấy ID đầu tiên nếu có)
+            // Lấy ID tác giả đầu tiên (nếu có)
             if (book.getAuthors() != null && !book.getAuthors().isEmpty()) {
                 etAuthor.setText(String.valueOf(book.getAuthors().get(0).getId()));
             }
-
-            // Note: Category ID chưa có trong response Book cũ, tạm thời để trống hoặc mặc định
+            // Category ID chưa có trong response mẫu, để trống hoặc mặc định
         }
 
-        // --- 3. XỬ LÝ SỰ KIỆN LƯU ---
         btnSave.setOnClickListener(v -> {
+            // Lấy dữ liệu từ ô nhập
             String title = etTitle.getText().toString().trim();
             String imageUrl = etImageUrl.getText().toString().trim();
             String publisher = etPublisher.getText().toString().trim();
             String yearStr = etYear.getText().toString().trim();
-            String categoryIdStr = etCategoryId.getText().toString().trim();
-            String authorIdStr = etAuthor.getText().toString().trim();
             String quantityStr = etQuantity.getText().toString().trim();
+            String authorIdStr = etAuthor.getText().toString().trim();
+            String categoryIdStr = etCategoryId.getText().toString().trim();
 
             // Validate cơ bản
             if (title.isEmpty()) {
@@ -142,69 +143,60 @@ public class BookManagementFragment extends Fragment {
                 return;
             }
 
-            // Parse số liệu (Xử lý lỗi nếu người dùng nhập chữ)
+            // Parse số (Xử lý lỗi nếu người dùng nhập chữ hoặc để trống)
             int year = 2024;
             try { year = Integer.parseInt(yearStr); } catch (Exception e) {}
 
-            int quantity = 0;
+            int quantity = 1;
             try { quantity = Integer.parseInt(quantityStr); } catch (Exception e) {}
 
-            int catId = 1; // Default category
-            try { catId = Integer.parseInt(categoryIdStr); } catch (Exception e) {}
+            int categoryId = 1;
+            try { categoryId = Integer.parseInt(categoryIdStr); } catch (Exception e) {}
 
             List<Integer> authorIds = new ArrayList<>();
             try {
-                authorIds.add(Integer.parseInt(authorIdStr));
-            } catch (Exception e) {
-                authorIds.add(1); // Default author ID 1 nếu không nhập
-            }
+                if(!authorIdStr.isEmpty()) authorIds.add(Integer.parseInt(authorIdStr));
+                else authorIds.add(1); // Mặc định ID 1 nếu trống
+            } catch (Exception e) { authorIds.add(1); }
 
-            // Tạo ISBN ngẫu nhiên (hoặc nhập nếu muốn)
-            String randomIsbn = "ISBN-" + System.currentTimeMillis();
+            // Tạo Request
+            BookRequest request = new BookRequest();
+            request.setTitle(title);
+            request.setIsbn("ISBN-" + System.currentTimeMillis()); // Fake ISBN ngẫu nhiên
+            request.setPublisher(publisher);
+            request.setYear(year);
+            request.setCategoryId(categoryId);
+            request.setAuthorIds(authorIds);
+            request.setImageUrl(imageUrl);
+            request.setQuantity(quantity);
+            request.setDescription("Mô tả sách..."); // Có thể thêm ô nhập mô tả sau
 
-            // Tạo Request với đầy đủ thông tin mới
-            BookRequest request = new BookRequest(
-                    title, randomIsbn, publisher, year, catId, authorIds, imageUrl, quantity
-            );
+            ApiService service = ApiClient.getService(getContext());
+
+            // Callback chung cho cả Thêm và Sửa
+            Callback<ApiResponse<Book>> commonCallback = new Callback<ApiResponse<Book>>() {
+                @Override
+                public void onResponse(Call<ApiResponse<Book>> call, Response<ApiResponse<Book>> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(getContext(), (book == null) ? "Thêm thành công!" : "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+                        loadBooksFromApi(); // Load lại danh sách
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(getContext(), "Thất bại: " + response.code(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<ApiResponse<Book>> call, Throwable t) {
+                    Toast.makeText(getContext(), "Lỗi mạng: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            };
 
             if (book == null) {
-                // --- THÊM MỚI ---
-                ApiClient.getService(getContext()).addBook(request).enqueue(new Callback<ApiResponse<Book>>() {
-                    @Override
-                    public void onResponse(Call<ApiResponse<Book>> call, Response<ApiResponse<Book>> response) {
-                        if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
-                            Toast.makeText(getContext(), "Thêm sách thành công!", Toast.LENGTH_SHORT).show();
-                            loadBooksFromApi(); // Load lại danh sách
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(getContext(), "Thất bại: " + response.code(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApiResponse<Book>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                // THÊM MỚI
+                service.addBook(request).enqueue(commonCallback);
             } else {
-                // --- CẬP NHẬT (EDIT) ---
-                ApiClient.getService(getContext()).updateBook(book.getId(), request).enqueue(new Callback<ApiResponse<Book>>() {
-                    @Override
-                    public void onResponse(Call<ApiResponse<Book>> call, Response<ApiResponse<Book>> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(getContext(), "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
-                            loadBooksFromApi();
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(getContext(), "Cập nhật lỗi: " + response.code(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApiResponse<Book>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                // CẬP NHẬT
+                service.updateBook(book.getId(), request).enqueue(commonCallback);
             }
         });
 
@@ -212,12 +204,11 @@ public class BookManagementFragment extends Fragment {
         dialog.show();
     }
 
-    // Hàm xóa sách
     private void deleteBookApi(Book book) {
         new AlertDialog.Builder(getContext())
-                .setTitle("Xác nhận")
+                .setTitle("Xác nhận xóa")
                 .setMessage("Bạn có chắc muốn xóa sách: " + book.getTitle() + "?")
-                .setPositiveButton("Xóa", (dialog, which) -> {
+                .setPositiveButton("Xóa", (d, w) -> {
                     ApiClient.getService(getContext()).deleteBook(book.getId()).enqueue(new Callback<ApiResponse<Void>>() {
                         @Override
                         public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
@@ -228,7 +219,6 @@ public class BookManagementFragment extends Fragment {
                                 Toast.makeText(getContext(), "Xóa thất bại", Toast.LENGTH_SHORT).show();
                             }
                         }
-
                         @Override
                         public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
                             Toast.makeText(getContext(), "Lỗi mạng", Toast.LENGTH_SHORT).show();
