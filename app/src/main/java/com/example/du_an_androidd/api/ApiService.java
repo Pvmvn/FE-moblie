@@ -1,8 +1,8 @@
 package com.example.du_an_androidd.api;
 
 import com.example.du_an_androidd.model.ApiResponse;
-import com.example.du_an_androidd.model.request.*; // Import tất cả request
-import com.example.du_an_androidd.model.response.*; // Import tất cả response
+import com.example.du_an_androidd.model.request.*;
+import com.example.du_an_androidd.model.response.*;
 
 import java.util.List;
 import retrofit2.Call;
@@ -33,24 +33,34 @@ public interface ApiService {
     @POST("books")
     Call<ApiResponse<Book>> addBook(@Body BookRequest request);
 
-    // --- [MỚI] THÊM CÁC HÀM SỬA/XÓA SÁCH ---
     @PUT("books/{id}")
     Call<ApiResponse<Book>> updateBook(@Path("id") int id, @Body BookRequest request);
 
     @DELETE("books/{id}")
     Call<ApiResponse<Void>> deleteBook(@Path("id") int id);
-    // ---------------------------------------
 
-    // --- MEMBERS ---
+    // --- MEMBERS (KHÁCH HÀNG) ---
     @GET("members")
     Call<ApiResponse<List<Member>>> getMembers();
 
     @POST("members")
     Call<ApiResponse<Member>> addMember(@Body MemberRequest request);
 
+    // [QUAN TRỌNG] THÊM 2 HÀM NÀY ĐỂ SỬA LỖI:
+    @PUT("members/{id}")
+    Call<ApiResponse<Member>> updateMember(@Path("id") int id, @Body MemberRequest request);
+
+    @DELETE("members/{id}")
+    Call<ApiResponse<Void>> deleteMember(@Path("id") int id);
+    // --------------------------------------------------
+
     // --- LOANS ---
     @GET("loans")
     Call<ApiResponse<List<Loan>>> getLoans(@Query("status") String status);
+
+    // Nếu bạn muốn lọc theo member_id, có thể dùng hàm này (tùy chọn):
+    // @GET("loans")
+    // Call<ApiResponse<List<Loan>>> getLoans(@Query("member_id") Integer memberId);
 
     @POST("loans/borrow")
     Call<ApiResponse<Loan>> borrowBook(@Body LoanRequest request);

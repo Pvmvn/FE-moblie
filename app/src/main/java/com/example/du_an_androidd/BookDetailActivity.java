@@ -119,11 +119,20 @@ public class BookDetailActivity extends AppCompatActivity {
         tvLanguage.setText("Tiếng Việt");
 
         // Ảnh
-        if (book.getImageUrl() != null && !book.getImageUrl().isEmpty()) {
+        String imageUrl = book.getImageUrl();
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            // Nếu URL là relative path (bắt đầu bằng /), thêm BASE_URL
+            if (imageUrl.startsWith("/")) {
+                imageUrl = "http://10.0.2.2:3000" + imageUrl;
+            }
             Glide.with(this)
-                    .load(book.getImageUrl())
+                    .load(imageUrl)
                     .placeholder(R.drawable.ic_book)
+                    .error(R.drawable.ic_book)
+                    .centerCrop()
                     .into(imgBookCover);
+        } else {
+            imgBookCover.setImageResource(R.drawable.ic_book);
         }
     }
 
@@ -180,10 +189,13 @@ public class BookDetailActivity extends AppCompatActivity {
 
             try { request.setYear(Integer.parseInt(etYear.getText().toString())); } catch (Exception e) { request.setYear(2024); }
             try { request.setQuantity(Integer.parseInt(etQuantity.getText().toString())); } catch (Exception e) { request.setQuantity(1); }
-            try { request.setCategoryId(Integer.parseInt(etCategoryId.getText().toString())); } catch (Exception e) { request.setCategoryId(1); }
+            
+            // Mặc định categoryId = 1 (đã ẩn trường nhập liệu)
+            request.setCategoryId(1);
 
+            // Mặc định authorIds = [1] (đã ẩn trường nhập liệu)
             List<Integer> authIds = new ArrayList<>();
-            try { authIds.add(Integer.parseInt(etAuthor.getText().toString())); } catch (Exception e) { authIds.add(1); }
+            authIds.add(1);
             request.setAuthorIds(authIds);
 
             // Gọi API Update

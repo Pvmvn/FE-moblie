@@ -134,8 +134,7 @@ public class BookManagementFragment extends Fragment {
             String publisher = etPublisher.getText().toString().trim();
             String yearStr = etYear.getText().toString().trim();
             String quantityStr = etQuantity.getText().toString().trim();
-            String authorIdStr = etAuthor.getText().toString().trim();
-            String categoryIdStr = etCategoryId.getText().toString().trim();
+            // Lưu ý: etAuthor và etCategoryId đã bị ẩn, sử dụng giá trị mặc định bên dưới
 
             // Validate cơ bản
             if (title.isEmpty()) {
@@ -150,14 +149,12 @@ public class BookManagementFragment extends Fragment {
             int quantity = 1;
             try { quantity = Integer.parseInt(quantityStr); } catch (Exception e) {}
 
+            // Mặc định categoryId = 1 (đã ẩn trường nhập liệu)
             int categoryId = 1;
-            try { categoryId = Integer.parseInt(categoryIdStr); } catch (Exception e) {}
 
+            // Mặc định authorIds = [1] (đã ẩn trường nhập liệu)
             List<Integer> authorIds = new ArrayList<>();
-            try {
-                if(!authorIdStr.isEmpty()) authorIds.add(Integer.parseInt(authorIdStr));
-                else authorIds.add(1); // Mặc định ID 1 nếu trống
-            } catch (Exception e) { authorIds.add(1); }
+            authorIds.add(1);
 
             // Tạo Request
             BookRequest request = new BookRequest();
